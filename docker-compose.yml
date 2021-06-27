@@ -26,6 +26,7 @@ services:
       CARDS_URL: https://glej.parlameter.si/
       NOTIFICATIONS_URL: https://obvestila.parlameter.si/
       PARLAMETER_SOLR_URL: http://solr:8983/solr/parlasearch
+      DJANGO_SUPERUSER_PASSWORD: changeme 
 
   db:
     image: postgres:latest

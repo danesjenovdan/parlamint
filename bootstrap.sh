@@ -15,18 +15,20 @@ sudo docker-compose exec parladata python manage.py migrate
 echo '[SUCCESS!] Database migrated!'
 echo ''
 
-echo '[INFO] Creating super user. This is interactive, please answer the questions.'
-sudo docker-compose exec parladata python manage.py createsuperuser
+echo '[INFO] Creating the default super user (you should change it later).'
+sudo docker-compose exec parladata python manage.py createsuperuser --noinput --username demo --email demo@example.com
 echo '[SUCCESS!] Superuser created!'
 echo ''
 
 echo '[INFO] Downloading slovenian dataset ...'
-cd parlamint-parser/data && curl --remote-name-all https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1432{/ParlaMint-$1.tgz}
+cd parlamint-parser/data
+curl --remote-name-all https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1432{/ParlaMint-$1.tgz}
 echo '[SUCCESS!] Successfully downloaded data'
 echo ''
 
 echo '[INFO] Unzipping data ...'
 tar -zxvf ParlaMint-$1.tgz
+cd ../..
 echo '[SUCCESS!] Done unzipping!'
 echo ''
 
