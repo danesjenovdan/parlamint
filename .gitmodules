@@ -1,0 +1,15 @@
+[submodule "parladata"]
+	path = parladata
+	url = https://github.com/danesjenovdan/parladata
+[submodule "parlanode"]
+	path = parlanode
+	url = https://github.com/danesjenovdan/parlanode
+[submodule "parlasearch"]
+	path = parlasearch
+	url = https://github.com/danesjenovdan/parlasearch
+[submodule "parlasite"]
+	path = parlasite
+	url = https://github.com/danesjenovdan/parlasite
+[submodule "parlassets"]
+	path = parlassets
+	url = https://github.com/danesjenovdan/parlassets
