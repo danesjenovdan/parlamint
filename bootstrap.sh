@@ -6,7 +6,7 @@ echo ''
 
 # run and build all the things
 echo '[INFO] Running docker-compose up ...'
-sudo docker-compose up -d parladata db parlasite parlanode solr
+sudo docker-compose up --build -d parladata db parlasite parlanode solr
 echo '[SUCCESS!] Containers running!'
 echo ''
 
@@ -21,7 +21,7 @@ echo '[SUCCESS!] Superuser created!'
 echo ''
 
 echo '[INFO] Downloading slovenian dataset ...'
-cd parlamint-parser/data #&& curl --remote-name-all https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1432{/ParlaMint-$1.tgz}
+cd parlamint-parser/data && curl --remote-name-all https://www.clarin.si/repository/xmlui/bitstream/handle/11356/1432{/ParlaMint-$1.tgz}
 echo '[SUCCESS!] Successfully downloaded data'
 echo ''
 
@@ -31,8 +31,9 @@ echo '[SUCCESS!] Done unzipping!'
 echo ''
 
 echo '[INFO] Starting to parse the stuff'
+sudo docker-compose build parser
 sudo docker-compose run parser python parser.py $1
-echo '[FAIL] Not implemented.'
+echo '[SUCCESS!] Parsed everything.'
 echo ''
 
 echo '[INFO] Lemmatizing speeches.'
@@ -44,6 +45,7 @@ echo '[INFO] Creating core and copying config ...'
 sudo docker-compose exec solr /opt/docker-solr/scripts/precreate-core parlasearch
 sudo docker-compose exec solr cp -f /parlasearch-conf/schema.xml /opt/solr/server/solr/mycores/parlasearch/conf/
 sudo docker-compose exec solr cp -f /parlasearch-conf/solrconfig.xml /opt/solr/server/solr/mycores/parlasearch/conf/
+sudo docker-compose restart solr
 echo '[SUCCESS!] Core created and config copied.'
 echo ''
 
@@ -53,7 +55,7 @@ echo '[SUCCESS!] Speeches uploaded to SOLR.'
 echo ''
 
 echo '[INFO] Calculating scores.'
-sudo docker-compose exec parladata python manage.py seed_scores
+sudo docker-compose exec parladata python manage.py seed_scores 1
 echo '[SUCCESS!] Scores calculated.'
 echo ''
 

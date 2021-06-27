@@ -68,7 +68,7 @@ services:
       - 3066:3066
     environment:
       NODE_ENV: development
-      MAIN_ORG_ID: "42"
-      MANDATE_ID: "7"
+      MAIN_ORG_ID: "1"
+      MANDATE_ID: "1"
     depends_on:
       - parladata
