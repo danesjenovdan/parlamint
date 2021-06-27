@@ -10,3 +10,6 @@
 [submodule "parlasite"]
 	path = parlasite
 	url = https://github.com/danesjenovdan/parlasite
+[submodule "parlamint-parser"]
+	path = parlamint-parser
+	url = https://github.com/danesjenovdan/parlamint-parser
